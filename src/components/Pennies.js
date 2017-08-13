@@ -9,7 +9,7 @@ export default class Pennies extends Component {
       pennies += '•';
     }
     return (
-      <View>
+      <View style={styles.score}>
         <Text>{this.props.owner} Pennies</Text>
         <Text>{pennies}</Text>
       </View>
@@ -20,6 +20,10 @@ export default class Pennies extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+  },
+  score: {
+    alignItems: 'center',
+    width: 100,
+    margin: 20
   }
 });

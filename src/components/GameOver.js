@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Pennies from './Pennies'
-import store from '../store'
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { updateScore } from '../reducers/totalScore';
+import store from '../store';
 
-export default class ScoreBoard extends Component {
+export default class GameOver extends Component {
   constructor() {
     super();
     this.state = store.getState();
   }
-
   componentDidMount() {
     this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
   }
@@ -20,12 +19,6 @@ export default class ScoreBoard extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Round {this.state.totalScore.round}
-        </Text>
-        <View style={styles.pennyContainer}>
-          <Pennies owner={'Your'} num={this.state.totalScore.playerScore} />
-          <Pennies owner={'My'} num={this.state.totalScore.compScore} />
-        </View>
       </View>
     );
   }
@@ -37,7 +30,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 20
   },
-  pennyContainer: {
+  rowContainer: {
     flexDirection: 'row',
+    // justifyContent: 'flex-start'
   }
-});
+});     
+     
+     {this.state.totalScore < 10 ?() : ()}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { resetMatch } from '../reducers/currentMatch';
 import { updateScore } from '../reducers/totalScore';
 import store from '../store';
@@ -14,7 +14,7 @@ export default class Match extends Component {
   calculateScore(player) {
     let score = 0;
     if (player === 'player') {
-      score = this.state.totalScore.playerScore; 
+      score = this.state.totalScore.playerScore;
       score += this.state.currentMatch.playerFlip === this.state.currentMatch.compFlip ? 2 : 0;
     }
     else {
@@ -37,13 +37,43 @@ export default class Match extends Component {
       <View style={styles.container}>
         <Text>Current Match</Text>
         <View style={styles.rowContainer}>
-          <View>
+          <View style={styles.pennyContainer}>
             <Text>You</Text>
-            <Text>{this.state.currentMatch.playerFlip ? (this.state.currentMatch.playerFlip === 1 ? 'Heads' : 'Tails') : '?'}</Text>
+            {this.state.currentMatch.playerFlip ? (this.state.currentMatch.playerFlip === 1 ?
+              <Image
+                style={styles.image}
+                source={require('../../images/heads.png')}
+              /> :
+              <Image
+                style={styles.image}
+                source={require('../../images/tails.png')}
+              />
+            ) : (
+                <Image
+                  style={styles.image}
+                  source={require('../../images/question.png')}
+                />
+              )
+            }
           </View>
-          <View>
+          <View style={styles.pennyContainer}>
             <Text>Me</Text>
-            <Text>{this.state.currentMatch.playerFlip ? (this.state.currentMatch.compFlip === 1 ? 'Heads' : 'Tails') : '?'}</Text>
+            {this.state.currentMatch.playerFlip ? (this.state.currentMatch.compFlip === 1 ?
+              <Image
+                style={styles.image}
+                source={require('../../images/heads.png')}
+              /> :
+              <Image
+                style={styles.image}
+                source={require('../../images/tails.png')}
+              />
+            ) : (
+                <Image
+                  style={styles.image}
+                  source={require('../../images/question.png')}
+                />
+              )
+            }
           </View>
         </View>
         {this.state.currentMatch.hasSelected ?
@@ -60,7 +90,8 @@ export default class Match extends Component {
             title="Next Round"
           />
           :
-          <Text> I'll reveal my choice when you pick yours.</Text>}
+          <Text> I'll reveal my choice when you pick yours.</Text>
+        }
       </View>
     );
   }
@@ -68,12 +99,20 @@ export default class Match extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 4,
     alignItems: 'center',
     paddingTop: 20
   },
   rowContainer: {
     flexDirection: 'row',
     // justifyContent: 'flex-start'
+  },
+  pennyContainer: {
+    alignItems: 'center',
+    margin: 20
+  },
+  image: {
+    width: 100,
+    height: 100,
   }
 });
