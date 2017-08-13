@@ -8,4 +8,8 @@ const reducer = combineReducers({
   totalScore,
 });
 
-export default () => createStore(reducer);
+
+const store = createStore(reducer)
+
+export default store
+

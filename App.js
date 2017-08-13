@@ -16,15 +16,7 @@ export default class App extends Component {
       oddFlip: 0,
       round: 1
     }
-    this.onWelcomePress = this.onWelcomePress.bind(this);
     this.onSelect = this.onSelect.bind(this);
-  }
-
-  // moves the welcome screen along
-  onWelcomePress() {
-    this.setState({
-      welcomeTextNum: ++this.state.welcomeTextNum
-    })
   }
 
   // when user selects heads or tails 
@@ -37,28 +29,9 @@ export default class App extends Component {
 
   render() {
     return (
-      // <View style={styles.container}>
-      //   {this.state.welcomeTextNum < welcomeText.length ?
-      //     <View >
-      //       <Welcome style={styles.welcomeText} text={welcomeText[this.state.welcomeTextNum]} />
-      //       <Button
-      //         onPress={this.onWelcomePress}
-      //         title="Next"
-      //       />
-      //     </View> :
-      //     <View>
-      //       <GameScreen
-      //       round={this.state.round}
-      //       evenScore={this.state.evenScore}
-      //       oddScore={this.state.oddScore}
-      //       onSelect={this.onSelect}
-      //       />
-      //     </View>
-      //   }
-      // </View>
       <NativeRouter>
         <View style={styles.appContainer}>
-          <Route exact path="/" component={Welcome} />
+          <Route exact path="/" component={GameScreen} />
           <Route exact path="/rules/:num" component={Rules} />
           <Route path="/play" component={GameScreen} />
         </View>
@@ -70,7 +43,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
-    backgroundColor: 'aquamarine',
+    backgroundColor: 'lightcyan',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',

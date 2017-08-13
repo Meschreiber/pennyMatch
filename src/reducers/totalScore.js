@@ -1,13 +1,14 @@
 // INITIAL STATE
 
 const initialState = {
-  round: 0,
+  round: 1,
   playerScore: 0,
   compScore: 0
 }
 
 // ACTION TYPES
-export const UPDATE_SCORE = 'UPDATE_SCORE'
+export const UPDATE_SCORE = 'UPDATE_SCORE';
+export const RESET_SCORE = 'RESET_SCORE'
 
 // ACTIONS
 export const updateScore = (score) => {
@@ -18,7 +19,13 @@ export const updateScore = (score) => {
     compScore: score.compScore
 
   }
-}
+};
+
+export const resetScore = () => {
+  return {
+    type: RESET_SCORE
+  }
+};
 
 // REDUCER
 const totalScore = (state = initialState, action) => {
@@ -29,6 +36,13 @@ const totalScore = (state = initialState, action) => {
         round: action.round,
         playerScore: action.playerScore,
         compScore: action.compScore
+      }
+    case RESET_SCORE:
+      return {
+        ...state,
+        round: 1,
+        playerScore: 0,
+        compScore: 0
       }
     default:
       return state
