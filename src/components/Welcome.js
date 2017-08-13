@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-native'
 import { StyleSheet, Text, View } from 'react-native';
 
+// This is the welcome screen
+
 const Welcome = () => {
   return (
     <View>

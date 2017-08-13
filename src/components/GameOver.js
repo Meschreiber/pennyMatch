@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+// The resetScore action creator resets rounds and computer and player scores
 import { resetScore } from '../reducers/totalScore';
 import store from '../store';
 

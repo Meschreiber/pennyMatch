@@ -1,5 +1,4 @@
 // INITIAL STATE
-
 const initialState = {
   hasSelected: 0,
   playerFlip: 0,

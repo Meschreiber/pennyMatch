@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-native'
 import { StyleSheet, Text, View } from 'react-native';
 
+// This component uses React-Router to cycle through the rules when a player first enters.
+
 const rules = [
   "Let's play penny match!",
   "Each round, select either heads or tails.  I, your mobile device, 📱 will do the same.",

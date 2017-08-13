@@ -5,6 +5,7 @@ import Welcome from './src/components/Welcome.js';
 import GameScreen from './src/components/GameScreen';
 import Rules from './src/components/Rules';
 
+// This is the main app 
 const App = () => {
     return (
       <NativeRouter>

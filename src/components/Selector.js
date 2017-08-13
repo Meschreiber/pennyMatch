@@ -3,8 +3,11 @@ import { TouchableOpacity, Button, StyleSheet, Text, View, Image } from 'react-n
 import { updateMatch } from '../reducers/currentMatch';
 import store from '../store';
 
+// The selector component allows users to select heads or tails by clicking on images of pennies
+// 0 = next yet selected, 1 = heads, 2 = tails
+
 export default class Selector extends Component {
-  // 0 = next yet selected, 1 = heads, 2 = tails
+
   constructor() {
     super();
     this.state = store.getState();
@@ -71,7 +74,7 @@ const styles = StyleSheet.create({
     flex: 3,
     alignItems: 'center',
   },
-    text: {
+  text: {
     fontSize: 16,
     fontFamily: 'Avenir'
   },

@@ -1,5 +1,4 @@
 // INITIAL STATE
-
 const initialState = {
   round: 1,
   playerScore: 0,

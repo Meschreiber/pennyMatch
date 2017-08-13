@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+// This component shows the number of pennies as bullet points for each player
+
 export default class Pennies extends Component {
   render() {
     let pennies = '';

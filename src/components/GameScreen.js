@@ -21,6 +21,7 @@ export default class GameScreen extends Component {
     this.unsubscribe();
   }
 
+// The game screen either renders a scoreboard, current match, and selector OR the gameover screen depending on whether or not there are more than ten rounds
   render() {
     return this.state.totalScore.round <= 10 ?
       (<View style={styles.container}>

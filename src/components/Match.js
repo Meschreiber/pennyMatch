@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+// The resetMatch action creator resets the players and computer's current choices
 import { resetMatch } from '../reducers/currentMatch';
+// The updateScore action creator sends the appropriate score for the player and computer to the state
 import { updateScore } from '../reducers/totalScore';
 import store from '../store';
 
@@ -13,10 +15,12 @@ export default class Match extends Component {
 
   calculateScore(player) {
     let score = 0;
+    // In order for the player to score, the flips must match
     if (player === 'player') {
       score = this.state.totalScore.playerScore;
       score += this.state.currentMatch.playerFlip === this.state.currentMatch.compFlip ? 2 : 0;
     }
+    // In order for the computer to score, the flips must not match
     else {
       score = this.state.totalScore.compScore;
       score += this.state.currentMatch.playerFlip !== this.state.currentMatch.compFlip ? 2 : 0;
