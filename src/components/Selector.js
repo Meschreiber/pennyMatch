@@ -21,7 +21,7 @@ export default class Selector extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View><Text>Pick one:</Text></View>
+        <View style={styles.pickContainer}><Text style={styles.text} >Pick one:</Text></View>
         <View style={styles.pennyContainer}>
           <TouchableOpacity
             disabled={!!this.state.currentMatch.playerFlip}
@@ -69,15 +69,22 @@ export default class Selector extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 3,
-    //justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+  },
+    text: {
+    fontSize: 16,
+    fontFamily: 'Avenir'
   },
   pennyContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-around'
+  },
+  pickContainer: {
+    margin: 15
   },
   pennyButton: {
-    margin: 20
+    margin: 15,
+    marginTop: 0
   },
   image: {
     width: 100,

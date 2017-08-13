@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import ScoreBoard from './ScoreBoard'
+import { StyleSheet, Text, View } from 'react-native';
 
 export default class Pennies extends Component {
   render() {
@@ -10,7 +9,7 @@ export default class Pennies extends Component {
     }
     return (
       <View style={styles.score}>
-        <Text>{this.props.owner} Pennies</Text>
+        <Text style={{ fontFamily: 'Avenir'}}>{this.props.owner} Pennies</Text>
         <Text>{pennies}</Text>
       </View>
     );
@@ -18,9 +17,6 @@ export default class Pennies extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   score: {
     alignItems: 'center',
     width: 100,

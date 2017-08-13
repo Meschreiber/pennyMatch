@@ -20,12 +20,8 @@ export default class ScoreBoard extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Round {this.state.totalScore.round}
-        </Text>
-        <View style={styles.pennyContainer}>
-          <Pennies owner={'Your'} num={this.state.totalScore.playerScore} />
-          <Pennies owner={'My'} num={this.state.totalScore.compScore} />
-        </View>
+        <Pennies owner={'Your'} num={this.state.totalScore.playerScore} />
+        <Pennies owner={'My'} num={this.state.totalScore.compScore} />
       </View>
     );
   }
@@ -34,10 +30,10 @@ export default class ScoreBoard extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    borderRadius: 4,
     alignItems: 'center',
-    paddingTop: 20
-  },
-  pennyContainer: {
+    marginTop: 25,
     flexDirection: 'row',
+    backgroundColor: 'peru',
   }
 });
