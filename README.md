@@ -4,6 +4,7 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 
 **Matching pennies** is a simple game in game theory.  Read more about the rules [here](https://en.wikipedia.org/wiki/Matching_pennies).
 
+## How to play
 In order to play the game do the following:
 
 1) Clone or download this repo.
