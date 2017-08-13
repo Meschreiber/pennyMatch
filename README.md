@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app) and uses React-Router and Redux.
+# Matching Pennies
+
+This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app) and uses React-Router and Redux.  Much of this ReadMe comes from  [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Matching pennies is a simple game in game theory.  Read more about the rules [here](https://en.wikipedia.org/wiki/Matching_pennies).
 
@@ -8,7 +10,7 @@ In order to play the game do the following:
 2) Type `npm install` into the control line (assuming you have node.js and npm installed. If not you can download them [here](https://www.npmjs.com/get-npm).
 3) Run it using either `npm start`, `npm run ios`, or `npm run android`.  For more about each of these run scripts, see below.
 
-### `npm start`
+#### `npm start`
 
 Runs your app in development mode.
 
@@ -28,6 +30,8 @@ Like `npm start`, but also attempts to open your app in the iOS Simulator if you
 #### `npm run android`
 
 Like `npm start`, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for detailed setup). The creators or create-react-native-app also recommend installing Genymotion as your Android emulator. 
+
+## Troubleshooting
 
 ### Networking
 
