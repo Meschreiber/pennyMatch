@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Alert, Button, StyleSheet, View } from 'react-native';
-import Welcome from './components/Welcome'
-// import NextButton from './components/NextButton.js'
-import GameScreen from './components/GameScreen'
+import { StyleSheet, View } from 'react-native';
+import { Route, NativeRouter } from 'react-router-native';
+import Welcome from './src/components/Welcome.js'
+import GameScreen from './src/components/GameScreen'
+import Rules from './src/components/Rules'
 
 export default class App extends Component {
   constructor() {
@@ -15,63 +16,65 @@ export default class App extends Component {
       oddFlip: 0,
       round: 1
     }
-    this.onPressButton = this.onPressButton.bind(this);
-
+    this.onWelcomePress = this.onWelcomePress.bind(this);
+    this.onSelect = this.onSelect.bind(this);
   }
 
-  onPressButton() {
-    // console.log('num', this.state.welcomeTextNum++)
+  // moves the welcome screen along
+  onWelcomePress() {
     this.setState({
       welcomeTextNum: ++this.state.welcomeTextNum
     })
   }
 
+  // when user selects heads or tails 
+  onSelect(num) {
+    this.setState({
+      evenFlip: num,
+      oddFlip: Math.round(Math.random()) + 1
+    });
+  }
+
   render() {
-    console.log('state', this.state);
     return (
-      <View style={styles.container}>
-        {this.state.welcomeTextNum < welcomeText.length ?
-          <View >
-            <Welcome style={styles.welcomeText} text={welcomeText[this.state.welcomeTextNum]} />
-            <Button
-              onPress={this.onPressButton}
-              title="Next"
-            />
-          </View> :
-          <View>
-            <GameScreen
-            round={this.state.round}
-            evenScore={this.state.evenScore}
-            oddScore={this.state.oddScore}
-            />
-          </View>
-        }
-      </View>
+      // <View style={styles.container}>
+      //   {this.state.welcomeTextNum < welcomeText.length ?
+      //     <View >
+      //       <Welcome style={styles.welcomeText} text={welcomeText[this.state.welcomeTextNum]} />
+      //       <Button
+      //         onPress={this.onWelcomePress}
+      //         title="Next"
+      //       />
+      //     </View> :
+      //     <View>
+      //       <GameScreen
+      //       round={this.state.round}
+      //       evenScore={this.state.evenScore}
+      //       oddScore={this.state.oddScore}
+      //       onSelect={this.onSelect}
+      //       />
+      //     </View>
+      //   }
+      // </View>
+      <NativeRouter>
+        <View style={styles.appContainer}>
+          <Route exact path="/" component={Welcome} />
+          <Route exact path="/rules/:num" component={Rules} />
+          <Route path="/play" component={GameScreen} />
+        </View>
+      </NativeRouter>
     );
   }
 }
 
-const welcomeText = [
-  "Let's play penny match!",
-  "Each round, select either heads or tails.  I (your phone) will do the same.",
-  "If the pennies match, you get both! 😁",
-  "But if they don't, I gets both. 😲",
-  "We'll play ten rounds..."]
-
 const styles = StyleSheet.create({
-  container: {
+  appContainer: {
     flex: 1,
     backgroundColor: 'aquamarine',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
   },
-  welcomeText: {
-    fontFamily: 'Avenir',
-    fontSize: 30,
-    textAlign: 'center',
-    padding: 10
-  }
 });
 
 

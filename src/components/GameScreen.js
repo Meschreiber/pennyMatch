@@ -14,7 +14,8 @@ export default class GameScreen extends Component {
           oddScore={this.props.oddScore} />
       </View>
       <View>
-        <Selector />
+        <Selector
+        onSelect={this.props.onSelect}/>
       </View>
       </View>
     );
