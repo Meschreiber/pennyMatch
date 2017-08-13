@@ -2,12 +2,12 @@
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app) and uses React-Router and Redux.  Much of this ReadMe comes from  [Create React Native App](https://github.com/react-community/create-react-native-app).
 
-Matching pennies is a simple game in game theory.  Read more about the rules [here](https://en.wikipedia.org/wiki/Matching_pennies).
+**Matching pennies** is a simple game in game theory.  Read more about the rules [here](https://en.wikipedia.org/wiki/Matching_pennies).
 
 In order to play the game do the following:
 
 1) Clone or download this repo.
-2) Type `npm install` into the control line (assuming you have node.js and npm installed. If not you can download them [here](https://www.npmjs.com/get-npm).
+2) `cd` into the appropriate folder and type `npm install` into the control line (assuming you have node.js and npm installed. If not you can download them [here](https://www.npmjs.com/get-npm).
 3) Run it using either `npm start`, `npm run ios`, or `npm run android`.  For more about each of these run scripts, see below.
 
 #### `npm start`
