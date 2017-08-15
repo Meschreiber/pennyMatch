@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { resetMatch } from '../reducers/currentMatch';
 // The updateScore action creator sends the appropriate score for the player and computer to the state
 import { updateScore } from '../reducers/totalScore';
+import FadeInView from './FadeInView'
 import store from '../store';
 
 export default class Match extends Component {
@@ -76,14 +77,19 @@ export default class Match extends Component {
           <View style={styles.pennyContainer}>
             <View style={styles.label}><Text style={styles.text}>Me</Text></View>
             {this.state.currentMatch.playerFlip ? (this.state.currentMatch.compFlip === 1 ?
-              <Image
-                style={styles.image}
-                source={require('../../images/heads.png')}
-              /> :
-              <Image
-                style={styles.image}
-                source={require('../../images/tails.png')}
-              />
+              <FadeInView>
+                <Image
+                  style={styles.image}
+                  source={require('../../images/heads.png')}
+                />
+              </FadeInView>
+              :
+              <FadeInView>
+                <Image
+                  style={styles.image}
+                  source={require('../../images/tails.png')}
+                />
+              </FadeInView>
             ) : (
                 <Image
                   style={styles.image}
