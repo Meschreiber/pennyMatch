@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app) and uses React-Router and Redux.  Much of this ReadMe comes from  [Create React Native App](https://github.com/react-community/create-react-native-app).
 
-**Matching pennies** is a simple game in game theory.  Read more about the rules [here](https://en.wikipedia.org/wiki/Matching_pennies).
+**Matching pennies** is a simple game in game theory.  Read more about the rules [here](https://en.wikipedia.org/wiki/Matching_pennies).  One player is traditionally called 'Even' and wins when the pennies match and the other is called 'Odd' and wins when the pennies do not match.  In this game, the human player is Even and the mobile device is Odd.  The game is played for ten rounds.
 
 ## How to play
 In order to play the game do the following:
