@@ -27,7 +27,6 @@ export default class GameScreen extends Component {
       (<View style={styles.container}>
         <ScoreBoard />
         <Match />
-        <Selector />
       </View>
       )
       :

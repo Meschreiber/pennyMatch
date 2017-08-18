@@ -1,8 +1,12 @@
+import { Animated } from 'react-native';
+
 // INITIAL STATE
 const initialState = {
   hasSelected: 0,
   playerFlip: 0,
-  compFlip: 0
+  compFlip: 0,
+  animatedHead: new Animated.Value(0),
+  animatedTail: new Animated.Value(0)
 };
 
 // ACTION TYPES
@@ -39,7 +43,9 @@ const currentMatch = (state = initialState, action) => {
         ...state,
         hasSelected: 0,
         playerFlip: 0,
-        compFlip: 0
+        compFlip: 0,
+        animatedHead: new Animated.Value(0),
+        animatedTail: new Animated.Value(0)
       };
     default:
       return state;

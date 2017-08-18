@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Button, StyleSheet, Text, View, Image } from 'react-native';
+import { TouchableOpacity, StyleSheet, Text, View, Image, Animated, Easing } from 'react-native';
 import { updateMatch } from '../reducers/currentMatch';
 import store from '../store';
 
@@ -11,6 +11,32 @@ export default class Selector extends Component {
   constructor() {
     super();
     this.state = store.getState();
+    //this.animatedHead = new Animated.Value(0);
+    //this.animatedTail = new Animated.Value(0);
+    this.moveUp = this.moveUp.bind(this);
+    this.moveLeft = this.moveLeft.bind(this);
+  }
+
+  moveUp() {
+    Animated.timing(
+      this.state.currentMatch.animatedHead,
+      {
+        toValue: 1,
+        duration: 1000,
+        easing: Easing.linear
+      }
+    ).start(() => this.moveUp())
+  }
+
+  moveLeft() {
+    Animated.timing(
+      this.state.currentMatch.animatedTail,
+      {
+        toValue: 1,
+        duration: 1000,
+        easing: Easing.linear
+      }
+    ).start(() => this.moveLeft())
   }
 
   componentDidMount() {
@@ -22,6 +48,20 @@ export default class Selector extends Component {
   }
 
   render() {
+    console.log('STATE', this.state);
+    const marginHeadTop = this.state.currentMatch.animatedHead.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, -245]
+    })
+    const marginLeft = this.state.currentMatch.animatedTail.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, -180]
+    })
+    const marginTailTop = this.state.currentMatch.animatedTail.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, -245]
+    })
+
     return (
       <View style={styles.container}>
         <View style={styles.pickContainer}><Text style={styles.text} >Pick one:</Text></View>
@@ -36,13 +76,20 @@ export default class Selector extends Component {
                   compFlip: Math.round(Math.random()) + 1
                 })
                 )
+                this.moveUp();
               }
             }
           >
-            <Image
-              style={styles.image}
-              source={require('../../images/heads.png')}
-            />
+            <Animated.View
+              style={{
+                marginTop: marginHeadTop
+              }}
+            >
+              <Image
+                style={styles.image}
+                source={require('../../images/heads.png')}
+              />
+            </Animated.View >
           </TouchableOpacity>
           <TouchableOpacity
             disabled={!!this.state.currentMatch.playerFlip}
@@ -54,13 +101,21 @@ export default class Selector extends Component {
                   compFlip: Math.round(Math.random()) + 1
                 })
                 )
+                this.moveLeft();
               }
             }
           >
-            <Image
-              style={styles.image}
-              source={require('../../images/tails.png')}
-            />
+            <Animated.View
+              style={{
+                marginLeft,
+                marginTop: marginTailTop
+              }}
+            >
+              <Image
+                style={styles.image}
+                source={require('../../images/tails.png')}
+              />
+            </Animated.View>
           </TouchableOpacity>
         </View>
       </View>

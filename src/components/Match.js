@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { Animated, Easing, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 // The resetMatch action creator resets the players and computer's current choices
 import { resetMatch } from '../reducers/currentMatch';
+import { updateMatch } from '../reducers/currentMatch';
 // The updateScore action creator sends the appropriate score for the player and computer to the state
 import { updateScore } from '../reducers/totalScore';
 import FadeInView from './FadeInView'
@@ -12,6 +13,30 @@ export default class Match extends Component {
     super();
     this.state = store.getState();
     this.calculateScore = this.calculateScore.bind(this);
+    this.moveUp = this.moveUp.bind(this);
+    this.moveLeft = this.moveLeft.bind(this);
+  }
+
+  moveUp() {
+    Animated.timing(
+      this.state.currentMatch.animatedHead,
+      {
+        toValue: 1,
+        duration: 1000,
+        easing: Easing.linear
+      }
+    ).start(() => this.moveUp())
+  }
+
+  moveLeft() {
+    Animated.timing(
+      this.state.currentMatch.animatedTail,
+      {
+        toValue: 1,
+        duration: 1000,
+        easing: Easing.linear
+      }
+    ).start(() => this.moveLeft())
   }
 
   calculateScore(player) {
@@ -38,6 +63,18 @@ export default class Match extends Component {
   }
 
   render() {
+    const marginHeadTop = this.state.currentMatch.animatedHead.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, -245]
+    })
+    const marginLeft = this.state.currentMatch.animatedTail.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, -180]
+    })
+    const marginTailTop = this.state.currentMatch.animatedTail.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, -245]
+    })
     return (
       <View style={styles.container}>
         <View>
@@ -55,18 +92,14 @@ export default class Match extends Component {
             <Text> </Text>
         }
         <View style={styles.rowContainer}>
-          <View style={styles.pennyContainer}>
+          <View style={styles.topPennyContainer}>
             <View style={styles.label}><Text style={styles.text}>You</Text></View>
-            {this.state.currentMatch.playerFlip ? (this.state.currentMatch.playerFlip === 1 ?
+            {this.state.currentMatch.playerFlip ?
               <Image
                 style={styles.image}
-                source={require('../../images/heads.png')}
-              /> :
-              <Image
-                style={styles.image}
-                source={require('../../images/tails.png')}
+
               />
-            ) : (
+              : (
                 <Image
                   style={styles.image}
                   source={require('../../images/question.png')}
@@ -135,6 +168,60 @@ export default class Match extends Component {
               <Text style={{ fontFamily: 'Avenir', fontSize: 13 }} > I'll reveal my choice when you pick yours.</Text>
           }
         </View>
+        <View style={styles.pickContainer}><Text style={styles.text} >Pick one:</Text></View>
+        <View style={styles.pennyContainer}>
+          <TouchableOpacity
+            disabled={!!this.state.currentMatch.playerFlip}
+            style={styles.pennyButton}
+            onPress={
+              () => {
+                store.dispatch(updateMatch({
+                  playerFlip: 1,
+                  compFlip: Math.round(Math.random()) + 1
+                })
+                )
+                this.moveUp();
+              }
+            }
+          >
+            <Animated.View
+              style={{
+                marginTop: marginHeadTop
+              }}
+            >
+              <Image
+                style={styles.image}
+                source={require('../../images/heads.png')}
+              />
+            </Animated.View >
+          </TouchableOpacity>
+          <TouchableOpacity
+            disabled={!!this.state.currentMatch.playerFlip}
+            style={styles.pennyButton}
+            onPress={
+              () => {
+                store.dispatch(updateMatch({
+                  playerFlip: 2,
+                  compFlip: Math.round(Math.random()) + 1
+                })
+                )
+                this.moveLeft();
+              }
+            }
+          >
+            <Animated.View
+              style={{
+                marginLeft,
+                marginTop: marginTailTop
+              }}
+            >
+              <Image
+                style={styles.image}
+                source={require('../../images/tails.png')}
+              />
+            </Animated.View>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -142,7 +229,7 @@ export default class Match extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 5,
+    flex: 8,
     alignItems: 'center',
     paddingTop: 20,
     borderRadius: 4,
@@ -153,7 +240,7 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
   },
-  pennyContainer: {
+  topPennyContainer: {
     alignItems: 'center',
     margin: 15,
     marginTop: 0,
@@ -184,5 +271,16 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     backgroundColor: 'thistle',
     padding: 5
+  },
+  pennyContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  pickContainer: {
+    margin: 15
+  },
+  pennyButton: {
+    margin: 15,
+    marginTop: 0
   }
 });
