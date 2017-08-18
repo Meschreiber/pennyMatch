@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import ScoreBoard from './ScoreBoard';
-import Selector from './Selector';
-import Match from './Match';
+import MatchandSelector from './MatchandSelector'
 import GameOver from './GameOver';
 import store from '../store';
 
@@ -25,9 +24,8 @@ export default class GameScreen extends Component {
   render() {
     return this.state.totalScore.round <= 10 ?
       (<View style={styles.container}>
-        <ScoreBoard />
-        <Match />
-        <Selector />
+        <ScoreBoard style={styles.container}/>
+        <MatchandSelector />
       </View>
       )
       :

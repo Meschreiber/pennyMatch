@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 4,
     alignItems: 'center',
-    marginTop: 25,
-    flexDirection: 'row',
-    backgroundColor: 'peru',
+    marginTop: 50,
+    marginBottom: 25,
+    flexDirection: 'row'
   }
 });

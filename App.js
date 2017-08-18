@@ -10,7 +10,7 @@ const App = () => {
     return (
       <NativeRouter>
         <View style={styles.appContainer}>
-          <Route exact path="/" component={Welcome} />
+          <Route exact path="/" component={GameScreen} />
           <Route exact path="/rules/:num" component={Rules} />
           <Route path="/play" component={GameScreen} />
         </View>

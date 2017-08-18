@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Button, StyleSheet, Text, View, Image } from 'react-native';
+import { TouchableOpacity, Animated, StyleSheet, Text, View, Image } from 'react-native';
 import { updateMatch } from '../reducers/currentMatch';
 import store from '../store';
 
@@ -11,6 +11,8 @@ export default class Selector extends Component {
   constructor() {
     super();
     this.state = store.getState();
+    this.offsetY = new Animated.Value(0);
+    //this.moveUp = this.moveUp.bind(this);
   }
 
   componentDidMount() {
@@ -21,16 +23,38 @@ export default class Selector extends Component {
     this.unsubscribe();
   }
 
+  moveUp() {
+    Animated.timing(
+      this.offsetY,
+      {
+        toValue: -240,
+        duration: 1000
+      }
+    ).start();
+  }
+    moveDown() {
+    console.log("hiding"); // <-------- prints out when button pressed
+    Animated.timing(
+      this.offsetY,
+      {
+        toValue: 240,
+        duration: 1000
+      }
+    ).start();
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.pickContainer}><Text style={styles.text} >Pick one:</Text></View>
         <View style={styles.pennyContainer}>
+        <Animated.View style={{ transform: [{translateY: this.offsetY}] }}>
           <TouchableOpacity
             disabled={!!this.state.currentMatch.playerFlip}
             style={styles.pennyButton}
             onPress={
               () => {
+                this.moveUp()
                 store.dispatch(updateMatch({
                   playerFlip: 1,
                   compFlip: Math.round(Math.random()) + 1
@@ -44,6 +68,7 @@ export default class Selector extends Component {
               source={require('../../images/heads.png')}
             />
           </TouchableOpacity>
+          </Animated.View>
           <TouchableOpacity
             disabled={!!this.state.currentMatch.playerFlip}
             style={styles.pennyButton}
